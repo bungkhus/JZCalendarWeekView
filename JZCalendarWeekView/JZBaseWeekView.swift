@@ -22,8 +22,8 @@ extension JZBaseViewDelegate {
 }
 
 enum Mode {
-    case .date
-    case .staff
+    case date
+    case staff
 }
 
 open class JZBaseWeekView: UIView {
@@ -31,7 +31,7 @@ open class JZBaseWeekView: UIView {
     public var collectionView: JZCollectionView!
     public var flowLayout: JZWeekViewFlowLayout!
     
-    public var mode: Mode = .date
+    var mode: Mode = .date
     public var staffs: [String] = [String]()
 
     /**
