@@ -55,4 +55,9 @@ open class JZColumnHeader: UICollectionReusableView {
         }
     }
     
+    public func updateView(staff: String) {
+        lblDay.text = ""
+        lblWeekday.text = staff
+    }
+    
 }

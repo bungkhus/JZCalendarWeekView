@@ -21,11 +21,19 @@ extension JZBaseViewDelegate {
     func initDateDidChange(_ weekView: JZBaseWeekView, initDate: Date) {}
 }
 
+enum Mode {
+    case .date
+    case .staff
+}
+
 open class JZBaseWeekView: UIView {
     
     public var collectionView: JZCollectionView!
     public var flowLayout: JZWeekViewFlowLayout!
     
+    public var mode: Mode = .date
+    public var staffs: [String] = [String]()
+
     /**
      - The initial date of current collectionView. When page is not scrolling, the inital date is always
      (numOfDays) days before current page first date, which means the start of the collectionView, not the current page first date
@@ -457,7 +465,18 @@ extension JZBaseWeekView: UICollectionViewDataSource {
             
         case JZSupplementaryViewKinds.columnHeader:
             let columnHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kind, for: indexPath) as! JZColumnHeader
-            columnHeader.updateView(date: flowLayout.dateForColumnHeader(at: indexPath))
+            switch self.mode {
+            case .date:
+                columnHeader.updateView(date: flowLayout.dateForColumnHeader(at: indexPath))
+                break
+            case .staff:
+                var staff = "Staff"
+                if indexPath.row > staffs.count {
+                    staff = self.staffs[indexPath.row]
+                }
+                columnHeader.updateView(staff: staff)
+                break
+            }
             view = columnHeader
             
         case JZSupplementaryViewKinds.rowHeader:
