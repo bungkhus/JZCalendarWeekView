@@ -33,6 +33,7 @@ open class JZBaseWeekView: UIView {
     
     var mode: Mode = .date
     public var staffs: [String] = [String]()
+    public var formatTime = "HH:mm"
 
     /**
      - The initial date of current collectionView. When page is not scrolling, the inital date is always
@@ -481,6 +482,7 @@ extension JZBaseWeekView: UICollectionViewDataSource {
             
         case JZSupplementaryViewKinds.rowHeader:
             let rowHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kind, for: indexPath) as! JZRowHeader
+            rowHeader.formatTime = self.formatTime
             rowHeader.updateView(date: flowLayout.timeForRowHeader(at: indexPath))
             view = rowHeader
             

@@ -13,6 +13,7 @@ open class JZRowHeader: UICollectionReusableView {
     
     public var lblTime = UILabel()
     public var dateFormatter = DateFormatter()
+    public var formatTime = "HH:mm"
     
     public override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -31,12 +32,13 @@ open class JZRowHeader: UICollectionReusableView {
     open func setupBasic() {
         // Hide all content when colum header height equals 0
         self.clipsToBounds = true
-        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.dateFormat = formatTime
         lblTime.textColor = JZWeekViewColors.rowHeaderTime
         lblTime.font = UIFont.systemFont(ofSize: 12)
     }
     
     public func updateView(date: Date) {
+        dateFormatter.dateFormat = formatTime
         lblTime.text = dateFormatter.string(from: date)
     }
     
