@@ -34,12 +34,13 @@ open class JZRowHeader: UICollectionReusableView {
         self.clipsToBounds = true
         dateFormatter.dateFormat = formatTime
         lblTime.textColor = JZWeekViewColors.rowHeaderTime
-        lblTime.font = UIFont.systemFont(ofSize: 12)
+        lblTime.font = UIFont.systemFont(ofSize: (formatTime == "HH:mm") ? 13 : 10)
     }
     
     public func updateView(date: Date) {
         dateFormatter.dateFormat = formatTime
         lblTime.text = dateFormatter.string(from: date)
+        lblTime.font = UIFont.systemFont(ofSize: (formatTime == "HH:mm") ? 13 : 10)
     }
     
     required public init?(coder aDecoder: NSCoder) {
