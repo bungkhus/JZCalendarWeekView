@@ -14,6 +14,7 @@ open class JZRowHeader: UICollectionReusableView {
     public var lblTime = UILabel()
     public var dateFormatter = DateFormatter()
     public var formatTime = "HH:mm"
+    private var isIpad = UIDevice.current.userInterfaceIdiom == .pad
     
     public override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -34,13 +35,13 @@ open class JZRowHeader: UICollectionReusableView {
         self.clipsToBounds = true
         dateFormatter.dateFormat = formatTime
         lblTime.textColor = JZWeekViewColors.rowHeaderTime
-        lblTime.font = UIFont.systemFont(ofSize: (formatTime == "HH:mm") ? 13 : 10)
+        lblTime.font = UIFont.systemFont(ofSize: (formatTime == "HH:mm") ? 13 : isIpad ? 9 : 8)
     }
     
     public func updateView(date: Date) {
         dateFormatter.dateFormat = formatTime
         lblTime.text = dateFormatter.string(from: date)
-        lblTime.font = UIFont.systemFont(ofSize: (formatTime == "HH:mm") ? 13 : 10)
+        lblTime.font = UIFont.systemFont(ofSize: (formatTime == "HH:mm") ? 13 : isIpad ? 9 : 8)
     }
     
     required public init?(coder aDecoder: NSCoder) {
