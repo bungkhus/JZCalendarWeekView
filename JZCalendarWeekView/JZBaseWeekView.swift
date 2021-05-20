@@ -726,6 +726,18 @@ extension JZBaseWeekView {
 // MARK: - WeekViewFlowLayoutDelegate
 extension JZBaseWeekView: WeekViewFlowLayoutDelegate {
     
+    func dateToString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter.string(from: Date())
+    }
+    
+    func nullDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        return dateFormatter.date(from: "\(self.dateToString()) 00:00")!
+    }
+    
     public func collectionView(_ collectionView: UICollectionView, layout: JZWeekViewFlowLayout, dayForSection section: Int) -> Date {
         return getDateForSection(section)
     }
@@ -737,7 +749,8 @@ extension JZBaseWeekView: WeekViewFlowLayoutDelegate {
             let event = isAllDaySupported ? notAllDayEventsBySection[date]![indexPath.item] : events[indexPath.item]
             return event.intraStartDate
         } else {
-            fatalError("Cannot get events")
+//            fatalError("Cannot get events")
+            return nullDate()
         }
     }
     
@@ -748,7 +761,8 @@ extension JZBaseWeekView: WeekViewFlowLayoutDelegate {
             let event = isAllDaySupported ? notAllDayEventsBySection[date]![indexPath.item] : events[indexPath.item]
             return event.intraEndDate
         } else {
-            fatalError("Cannot get events")
+//            fatalError("Cannot get events")
+            return nullDate()
         }
     }
     
